@@ -33,7 +33,7 @@ export default function Home() {
         >
           <Languages className="h-6 w-6 text-foreground transition-transform duration-300 group-hover:rotate-12" />
           <span className="ml-2 text-xl font-semibold font-headline">
-            FloatQuickTrans
+            FloatQuickTrans ❄️ 
           </span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
@@ -55,7 +55,7 @@ export default function Home() {
               rel="noopener noreferrer"
             >
               <Coffee className="mr-2 h-4 w-4" />
-              Buy me a coffee
+              Buy me a coffee 🙏
             </Link>
           </Button>
         </nav>
@@ -70,9 +70,9 @@ export default function Home() {
                     Instant Translation Floating Over Any App
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Seamlessly translate text from anywhere on your screen.
+                    🥳Seamlessly translate text from anywhere on your screen.
                     Real-time streaming, text-to-speech, and global hotkeys to
-                    supercharge your workflow.
+                    supercharge your workflow.And it's now free 🎉
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -81,8 +81,8 @@ export default function Home() {
                     asChild
                     className="transition-transform duration-300 hover:scale-105"
                   >
-                    <Link href="#" prefetch={false}>
-                      Download for macOS
+                    <Link href="https://github.com/hughedward/FloatQuickTrans/releases/download/0.0.13/FloatQuickTrans-0.0.13.dmg" prefetch={false}>
+                      Download for macOS 🥰
                     </Link>
                   </Button>
                   <Button
@@ -92,18 +92,15 @@ export default function Home() {
                     className="transition-transform duration-300 hover:scale-105"
                   >
                     <Link href="#" prefetch={false}>
-                      Download for Windows
+                      Download for Windows 🥸
                     </Link>
                   </Button>
                 </div>
               </div>
-              <Image
-                src="https://www.youtube.com/watch?v=ki4z5593GHs"
-                width="600"
-                height="400"
+              <img 
+                src="https://github.com/hughedward/FloatQuickTrans/blob/main/imgs/image-20250717153112790.png?raw=true"
                 alt="FloatQuickTrans App Screenshot"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last shadow-lg"
-                data-ai-hint="app screen translation"
               />
             </div>
           </div>
@@ -240,7 +237,14 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold">1. Download & Install</h3>
                 <p className="text-muted-foreground">
-                  Get the right version for your operating system (macOS or Windows) and install it.
+                  Get the right version for your operating system (macOS or Windows) and install it.Apply for a 
+                  <a target="_blank"
+                      rel="noopener noreferrer" className="hover:underline text-blue-500" 
+                      href="https://aistudio.google.com/app/apikey "> Gemini </a> 
+                  / <a target="_blank"
+                      rel="noopener noreferrer" className="text-blue-500 hover:underline" 
+                      href="https://platform.deepseek.com/usage"> DeepSeek </a> 
+                      API key
                 </p>
               </div>
               <div className="grid gap-4 text-center">
@@ -304,7 +308,13 @@ export default function Home() {
                 <AccordionItem value="item-4">
                   <AccordionTrigger>How do I configure the global hotkeys?</AccordionTrigger>
                   <AccordionContent>
-                    You can customize the global hotkeys in the app's settings/preferences to fit your personal workflow.
+                    You can customize the global hotkeys in the app's settings/preferences to fit your personal workflow.(Temporarily, changing hotkeys is not supported. If you need to modify the hotkeys, well, I have to alter the code. )
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-5">
+                  <AccordionTrigger>The Mac xxx.app is damaged and can't be opened. You should move it to the Trash.?</AccordionTrigger>
+                  <AccordionContent>
+                    sudo xattr -r -d com.apple.quarantine /Applications/xxx.app
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -334,7 +344,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Support Us
+            Support Us 🙏
           </Link>
         </nav>
       </footer>
