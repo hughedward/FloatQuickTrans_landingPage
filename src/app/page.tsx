@@ -81,7 +81,7 @@ export default function Home() {
                     asChild
                     className="transition-transform duration-300 hover:scale-105"
                   >
-                    <Link href="https://github.com/hughedward/FloatQuickTrans/releases/download/0.0.13/FloatQuickTrans-0.0.13.dmg" prefetch={false}>
+                    <Link href="https://github.com/hughedward/FloatQuickTrans/releases/download/v0.0.19/FloatQuickTrans-0.0.19.dmg" prefetch={false}>
                       Download for macOS 🥰
                     </Link>
                   </Button>
@@ -91,7 +91,7 @@ export default function Home() {
                     asChild
                     className="transition-transform duration-300 hover:scale-105"
                   >
-                    <Link href="#" prefetch={false}>
+                    <Link href="https://github.com/hughedward/FloatQuickTrans/releases/download/v0.0.19/win-unpacked-0.0.19.zip" prefetch={false}>
                       Download for Windows 🥸
                     </Link>
                   </Button>
