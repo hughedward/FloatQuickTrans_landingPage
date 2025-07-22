@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import { GithubStars } from '@/components/GithubStars';
 import { downloadLink } from '@/components/downloadLink';
+import { ThemeToggle } from "@/components/ThemeToggle";
+
 
 
 export default function Home() {
@@ -62,6 +64,7 @@ export default function Home() {
               Buy me a coffee 🙏
             </Link>
           </Button>
+          <ThemeToggle />
         </nav>
       </header>
       <main className="flex-1">

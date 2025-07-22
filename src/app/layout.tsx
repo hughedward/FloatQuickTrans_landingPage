@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import './globals.css';
+import { ThemeProvider } from 'next-themes'
 
 export const metadata: Metadata = {
   title: 'FloatQuickTrans',
@@ -11,14 +12,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+  return ( 
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased">{children}</body>
+      <body className="font-body antialiased">
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+          </ThemeProvider>
+      </body>
     </html>
+  
   );
 }
