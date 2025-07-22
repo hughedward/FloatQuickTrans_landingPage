@@ -104,9 +104,11 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <img 
-                src="https://github.com/hughedward/FloatQuickTrans/blob/main/imgs/image-20250717153112790.png?raw=true"
+              <Image 
+                src="/image-20250717153112790.png"
                 alt="FloatQuickTrans App Screenshot"
+                width={1200}  // 设置实际图片宽度
+                height={800}   // 设置实际图片高度
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last shadow-lg"
               />
             </div>
