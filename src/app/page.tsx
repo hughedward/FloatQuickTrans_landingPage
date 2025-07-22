@@ -21,6 +21,9 @@ import {
   MousePointerClick,
   Type,
 } from "lucide-react";
+import { GithubStars } from '@/components/GithubStars';
+import { downloadLink } from '@/components/downloadLink';
+
 
 export default function Home() {
   return (
@@ -39,14 +42,15 @@ export default function Home() {
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
           <Link
             href="https://github.com/hughedward/FloatQuickTrans"
-            className="text-sm font-medium hover:underline underline-offset-4"
+            className="text-sm font-medium hover:underline underline-offset-4 flex items-center gap-1"
             prefetch={false}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Repository"
           >
             <Github className="h-5 w-5" />
-          </Link>
+            <GithubStars />
+          </Link> 
           <Button asChild variant="ghost">
             <Link
               href="https://www.buymeacoffee.com/hughedward"
@@ -81,7 +85,7 @@ export default function Home() {
                     asChild
                     className="transition-transform duration-300 hover:scale-105"
                   >
-                    <Link href="https://github.com/hughedward/FloatQuickTrans/releases/download/v0.0.19/FloatQuickTrans-0.0.19.dmg" prefetch={false}>
+                    <Link href={downloadLink.macUrl} prefetch={false}>
                       Download for macOS 🥰
                     </Link>
                   </Button>
@@ -91,7 +95,7 @@ export default function Home() {
                     asChild
                     className="transition-transform duration-300 hover:scale-105"
                   >
-                    <Link href="https://github.com/hughedward/FloatQuickTrans/releases/download/v0.0.19/win-unpacked-0.0.19.zip" prefetch={false}>
+                    <Link href={downloadLink.winUrl} prefetch={false}>
                       Download for Windows 🥸
                     </Link>
                   </Button>
