@@ -55,12 +55,10 @@ export default function Home() {
           </Link> 
           <Button asChild variant="ghost">
             <Link
-              href="https://www.buymeacoffee.com/hughedward"
+              href="/coffee-tea"
               prefetch={false}
               target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Coffee className="mr-2 h-4 w-4" />
+              rel="noopener noreferrer">
               Buy me a coffee 🙏
             </Link>
           </Button>
