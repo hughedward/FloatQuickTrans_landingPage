@@ -147,7 +147,8 @@ export default function BuyMeACoffee() {
           <Card className="flex flex-col items-center bg-card border-border">
             <CardHeader>
               <CardTitle className="text-card-foreground">Stripe</CardTitle>
-              <CardDescription className="text-muted-foreground">Credit & debit card</CardDescription>
+              <CardDescription className="text-muted-foreground">Credit & debit card、Apple Pay、Google Pay、Linkpay
+              </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col items-center">
               <Button
