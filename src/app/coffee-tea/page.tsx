@@ -1,5 +1,7 @@
 "use client";
 
+// 添加防止主题切换闪烁的样式
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -11,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Progress } from "@/components/ui/progress";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { Github } from "lucide-react";
 
 /**
  * Buy-me-a-coffee page (Shadcn style)
@@ -35,9 +39,49 @@ const sponsors = [
 const monthTarget = 30;
 
 export default function BuyMeACoffee() {
+  // 添加状态来控制页面可见性，防止主题切换闪烁
+  const [mounted, setMounted] = useState(false);
+
+  // 在组件挂载后设置状态为true
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // 如果组件未挂载，返回一个预渲染的骨架屏，保持与当前主题一致的背景色
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        {/* 可以在这里添加一个加载指示器或者保持空白 */}
+      </div>
+    );
+  }
+
   return (
     <>
-      <main className="min-h-screen bg-gradient-to-b from-neutral-50 to-neutral-100 py-16 flex flex-col items-center px-4">
+      <header className="px-4 lg:px-6 h-16 flex items-center sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <a
+          href="/"
+          className="flex items-center justify-center group"
+        >
+          <span className="ml-2 text-xl font-semibold font-headline text-foreground">
+            FloatQuickTrans ❄️ 
+          </span>
+        </a>
+        <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
+          <a
+            href="https://github.com/hughedward/FloatQuickTrans"
+            className="text-sm font-medium hover:underline underline-offset-4 flex items-center gap-1 text-foreground"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Repository"
+          >
+            <Github className="h-5 w-5" />
+            GitHub
+          </a>
+          <ThemeToggle />
+        </nav>
+      </header>
+      <main className="min-h-screen bg-gradient-to-b from-background to-background/95 py-8 flex flex-col items-center px-4">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -45,8 +89,8 @@ export default function BuyMeACoffee() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl text-center mb-10"
         >
-          <h1 className="text-4xl font-bold mb-4">Buy me a coffee ☕</h1>
-          <h3 className="text-2xl font-bold mb-4">To support FloatQuickTrans</h3>
+          <h1 className="text-4xl font-bold mb-4 text-foreground">Buy me a coffee ☕</h1>
+          <h3 className="text-2xl font-bold mb-4 text-foreground">To support FloatQuickTrans</h3>
           <p className="text-muted-foreground">
             If my work has helped you, consider buying me a coffee. Your support
             keeps me going!
@@ -58,15 +102,15 @@ export default function BuyMeACoffee() {
         </p>
         <Progress
           value={(sponsors.length / monthTarget) * 100}
-          className="h-3 w-64 mx-auto mb-6 bg-neutral-200 dark:bg-neutral-700 [&>*]:bg-green-500"
+          className="h-3 w-64 mx-auto mb-6 bg-secondary [&>*]:bg-primary"
         />
 
         {/* Payment options */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl">
           {/* Alipay */}
-          <Card className="flex flex-col items-center">
+          <Card className="flex flex-col items-center bg-card border-border">
             <CardHeader>
-              <CardTitle>alipay</CardTitle>
+              <CardTitle className="text-card-foreground">alipay</CardTitle>
               {/* <CardDescription>Scan to tip via Alipay</CardDescription> */}
             </CardHeader>
             <CardContent className="flex flex-col items-center">
@@ -82,9 +126,9 @@ export default function BuyMeACoffee() {
           </Card>
 
           {/* WeChat Pay */}
-          <Card className="flex flex-col items-center">
+          <Card className="flex flex-col items-center bg-card border-border">
             <CardHeader>
-              <CardTitle>wechat-pay</CardTitle>
+              <CardTitle className="text-card-foreground">wechat-pay</CardTitle>
               {/* <CardDescription>Scan to tip via WeChat</CardDescription> */}
             </CardHeader>
             <CardContent className="flex flex-col items-center">
@@ -100,21 +144,19 @@ export default function BuyMeACoffee() {
           </Card>
 
           {/* Stripe */}
-          <Card className="flex flex-col items-center">
+          <Card className="flex flex-col items-center bg-card border-border">
             <CardHeader>
-              <CardTitle>Stripe</CardTitle>
-              <CardDescription>Credit & debit card</CardDescription>
-              ToDo:敬请期待
+              <CardTitle className="text-card-foreground">Stripe</CardTitle>
+              <CardDescription className="text-muted-foreground">Credit & debit card</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col items-center">
               <Button
                 onClick={() => {
-                  // 使用客户端导航而不是直接修改 window.location
-                  // 这样可以避免在页面加载时就触发 API 调用
+                  // 直接跳转到Stripe支付链接
                   try {
-                    window.location.href = "/api/checkout";
+                    window.open("https://buy.stripe.com/cNi9AU02E0tN2h1dUDbjW01", "_blank");
                   } catch (error) {
-                    console.error("导航到结账页面时出错:", error);
+                    console.error("打开Stripe支付链接时出错:", error);
                     // 添加错误处理，避免未捕获的异常
                   }
                 }}
@@ -128,7 +170,7 @@ export default function BuyMeACoffee() {
         {/* 标题贡献者 */}
         {/* 距离上面一个组件 100px */}
         <div className="flex flex-col items-center mt-[39px]">
-          <h2 className="text-2xl font-bold mb-4">Thanks Sponsors ☺️</h2>
+          <h2 className="text-2xl font-bold mb-4 text-foreground">Thanks Sponsors ☺️</h2>
         </div>
         {/* 贡献者头像列表 */}
         <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-3 mb-12">
@@ -144,14 +186,14 @@ export default function BuyMeACoffee() {
           ))}
         </div>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-background">
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-border bg-background">
         <p className="text-xs text-muted-foreground">
           &copy; Copyright © 2025 FloatQuickTrans.秋葉商店 All rights reserved
         </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <a
             href="https://github.com/hughedward/FloatQuickTrans"
-            className="text-xs hover:underline underline-offset-4"
+            className="text-xs text-foreground hover:underline underline-offset-4"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -159,7 +201,7 @@ export default function BuyMeACoffee() {
           </a>
           <a
             href="/"
-            className="text-xs hover:underline underline-offset-4"
+            className="text-xs text-foreground hover:underline underline-offset-4"
           >
             返回首页
           </a>
