@@ -123,7 +123,7 @@ export default function Home() {
                   Core Capabilities
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
-                  Everything You Need to Be Productive
+                Let translation not interrupt your train of thought.
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Our app is designed to be intuitive, fast, and unobtrusive,

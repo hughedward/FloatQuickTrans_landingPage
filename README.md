@@ -41,13 +41,14 @@ The Windows version is currently under development. Stay tuned for updates!
 ## Support
 If you have any questions or need support, feel free to [open an issue](https://github.com/hughedward/FloatQuickTrans/issues) on GitHub or [buy us a coffee](https://www.buymeacoffee.com/hughedward) to support the development.
 
-## Contributing
+## ❤️Contributing 📬
 We welcome contributions from the community! If you'd like to contribute, please follow these steps:
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them with descriptive messages.
-4. Push your changes to your fork.
-5. Submit a pull request.
+3. Make your changes and commit them with descriptive messages/shotcuts.Please write comments in the code as much as possible.
+4. Push your changes to your fork.Please keep the code clean, and it is recommended to use ESLint to check the formatting.
+5. Submit a pull request.It is recommended to focus on a single feature or fix, avoiding making too many changes at once.
+6. We'll review your PR and merge it once it's ready. We'll also appreciate it if you're willing to help review other PRs as well!
 
 ## License
 This project is licensed under the [Apache-2.0 license](LICENSE).
