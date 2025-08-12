@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -24,10 +25,61 @@ import {
 import { GithubStars } from '@/components/GithubStars';
 import { downloadLink } from '@/components/downloadLink';
 import { ThemeToggle } from "@/components/ThemeToggle";
-
+import { useEffect } from "react";
 
 
 export default function Home() {
+  // ======彩带，喜庆一下======
+  useEffect(() => {
+    let confetti: any;
+    let cancel = false;
+    // 首次访问才播（如果想每次刷新都播，把这一行判断删掉）
+    // const alreadyShown = sessionStorage.getItem("confettiShown");
+    // if (alreadyShown) return;
+    import("canvas-confetti").then((mod) => {
+      if (cancel) return;
+      confetti = mod.default;
+
+      const duration = 1800;
+      const end = Date.now() + duration;
+
+      const defaults = {
+        startVelocity: 24, // 速度更快
+        gravity: 1.0,      // 下落更快
+        ticks: 226,        // 寿命更短
+        spread: 100,
+        origin: { y: 0 },  // 从顶部
+        zIndex: 9999
+      };
+      // 均匀分布到整条横向
+      const stripes = 6;        // 横向“条带”数量，可按需调
+      const perShot = 6;        // 每次每条带的颗粒数（密度）
+
+
+      const interval = setInterval(() => {
+        if (Date.now() > end) {
+          clearInterval(interval);
+          sessionStorage.setItem("confettiShown", "1");
+          return;
+        }
+      
+        for (let i = 0; i < stripes; i++) {
+          // 均匀分布 + 少量抖动（避免太机械）
+          const x = (i + Math.random() * 0.8) / stripes;
+          confetti({
+            ...defaults,
+            particleCount: perShot,
+            origin: { y: 0, x }
+          });
+        }
+      }, 160);  // 发射频率（再快就把这个值调小）
+    });
+
+    return () => {
+      cancel = true;
+    };
+  }, []);
+  // ========================
   return (
     <div className="flex flex-col min-h-[100dvh] bg-background font-body">
       <header className="px-4 lg:px-6 h-16 flex items-center sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -232,6 +284,71 @@ export default function Home() {
             </div>
           </div>
         </section>
+        {/* Product Hunt demo card + copy */}
+        <section className="w-full py-6 md:py-10">
+          <div className="container px-4 md:px-6">
+            <div className="grid gap-6 md:grid-cols-2 items-center">
+              {/* Embed wrapped in a card so the white iframe doesn't feel abrupt on dark bg */}
+              <div className="rounded-xl bg-card border shadow-sm p-3 flex justify-center">
+                <iframe
+                  src="https://cards.producthunt.com/cards/products/1097426"
+                  className="border-none w-[500px] h-[405px] max-w-full"
+                  title="FloatQuickTrans on Product Hunt"
+                  frameBorder={0}
+                  allowFullScreen
+                />
+              </div>
+
+              {/* Context copy on the right */}
+              <div className="space-y-4">
+                <h3 className="text-2xl md:text-3xl font-bold font-headline">See it on Product Hunt</h3>
+                <p className="text-muted-foreground md:text-lg">
+                  Watch a quick demo and follow <span className="font-semibold">FloatQuickTrans</span> on Product Hunt. 
+                  {/* 分割线 */}
+                  <hr className="my-4" />
+                  <p className="text-muted-foreground md:text-lg">
+                    We’re trending on <span className="font-semibold">Product Hunt</span> today 🚀  <br />
+                    <span className="font-semibold">Your vote counts now — only 24 hours to shine!</span>  
+                    <ul className="list-disc pl-5 space-y-2 mt-3">
+                      <li>Click “Upvote” to help FloatQuickTrans reach more people ❤️</li>
+                      <li>Leave a quick comment — feedback boosts visibility 💬</li>
+                      <li>Share the link with friends who love productivity tools 🛠️</li>
+                      <li>Let’s make “translation without distraction” go viral 🌍</li>
+                    </ul>
+                  </p>
+                </p>
+                <div className="flex items-center gap-3">
+                  <Button asChild>
+                    <Link
+                      href="https://www.producthunt.com/products/floatquicktrans"
+                      prefetch={false}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View on Product Hunt
+                    </Link>
+                  </Button>
+                  <Link
+                    href="https://www.producthunt.com/products/floatquicktrans?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-floatquicktrans"
+                    prefetch={false}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex"
+                    aria-label="Product Hunt badge"
+                  >
+                    <img
+                      src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1004478&theme=light"
+                      alt="FloatQuickTrans on Product Hunt"
+                      width={160}
+                      height={34}
+                      className="h-[34px] w-auto"
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section id="how-it-works" className="w-full py-6 md:py-12 lg:py-16">
           <div className="container px-4 md:px-6">
@@ -301,7 +418,8 @@ export default function Home() {
                   Frequently Asked Questions
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Have questions? We've got answers. If you can't find what you're looking for, feel free to contact us.
+                  Have questions? We've got answers. If you can't find what you're looking for, <br/>
+                  feel free to <a className="underline" href="https://github.com/liuyueyi/floatquicktrans/issues">contact us</a>.
                 </p>
               </div>
             </div>
