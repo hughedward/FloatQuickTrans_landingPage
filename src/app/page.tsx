@@ -42,6 +42,19 @@ export default function Home() {
           </span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
+            <a
+              href="https://www.producthunt.com/products/floatquicktrans?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-floatquicktrans"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1004478&theme=light&t=1755019643899"
+                alt="FloatQuickTrans - Let translation not interrupt your train of thought. | Product Hunt"
+                style={{ width: '125px', height: '27px' }}
+                width="250"
+                height="54"
+              />
+            </a>
           <Link
             href="https://github.com/hughedward/FloatQuickTrans"
             className="text-sm font-medium hover:underline underline-offset-4 flex items-center gap-1"
