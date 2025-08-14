@@ -186,13 +186,14 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <Image 
+              {/* <Image 
                 src="/image-20250717153112790.png"
                 alt="FloatQuickTrans App Screenshot"
                 width={1200}  // 设置实际图片宽度
                 height={800}   // 设置实际图片高度
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last shadow-lg"
-              />
+              /> */}
+              <iframe width="560" height="339" src="https://www.youtube.com/embed/MQDMA4nbF5o?si=Ncztu8jFDOjfdh4O" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
           </div>
         </section>
