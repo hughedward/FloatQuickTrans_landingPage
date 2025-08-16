@@ -89,8 +89,15 @@ export default function Home() {
           prefetch={false}
         >
           <Languages className="h-6 w-6 text-foreground transition-transform duration-300 group-hover:rotate-12" />
-          <span className="ml-2 text-xl font-semibold font-headline">
-            FloatQuickTrans ❄️ 
+          <span className="ml-2 text-xl font-semibold font-headline flex items-center">
+            FloatQuickTrans 
+            <Image 
+              src="/output.ico" 
+              alt="FloatQuickTrans Icon" 
+              width={20} 
+              height={20} 
+              className="ml-1"
+            />
           </span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
