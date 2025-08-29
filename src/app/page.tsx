@@ -25,6 +25,8 @@ import {
 import { GithubStars } from '@/components/GithubStars';
 import { downloadLink } from '@/components/downloadLink';
 import { ThemeToggle } from "@/components/ThemeToggle";
+import DownloadCounter from '@/components/DownloadCounter';
+import DownloadButton from '@/components/DownloadButton';
 import { useEffect } from "react";
 
 
@@ -143,7 +145,8 @@ export default function Home() {
           >
             <Github className="h-5 w-5" />
             <GithubStars />
-          </Link> 
+          </Link>
+          <DownloadCounter className="hidden sm:flex" /> 
           <Button asChild variant="ghost">
             <Link
               href="/coffee-tea"
@@ -172,25 +175,18 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button
+                  <DownloadButton
+                    platform="macos"
                     size="lg"
-                    asChild
-                    className="transition-transform duration-300 hover:scale-105"
-                  >
-                    <Link href={downloadLink.macUrl} prefetch={false}>
-                      Download for macOS 🥰
-                    </Link>
-                  </Button>
-                  <Button
+                  />
+                  <DownloadButton
+                    platform="windows"
                     size="lg"
                     variant="secondary"
-                    asChild
-                    className="transition-transform duration-300 hover:scale-105"
-                  >
-                    <Link href={downloadLink.winUrl} prefetch={false}>
-                      Download for Windows 🥸
-                    </Link>
-                  </Button>
+                  />
+                </div>
+                <div className="flex justify-center mt-4">
+                  <DownloadCounter showPlatformBreakdown className="text-muted-foreground" />
                 </div>
               </div>
               {/* <Image 
@@ -200,7 +196,7 @@ export default function Home() {
                 height={800}   // 设置实际图片高度
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last shadow-lg"
               /> */}
-              <iframe width="560" height="339" src="https://www.youtube.com/embed/MQDMA4nbF5o?si=Ncztu8jFDOjfdh4O" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="560" height="339" src="https://www.youtube.com/embed/MQDMA4nbF5o?si=Ncztu8jFDOjfdh4O" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
           </div>
         </section>
@@ -330,20 +326,22 @@ export default function Home() {
               <div className="space-y-4">
                 <h3 className="text-2xl md:text-3xl font-bold font-headline">See it on Product Hunt</h3>
                 <p className="text-muted-foreground md:text-lg">
-                  Watch a quick demo and follow <span className="font-semibold">FloatQuickTrans</span> on Product Hunt. 
-                  {/* 分割线 */}
-                  <hr className="my-4" />
-                  <p className="text-muted-foreground md:text-lg">
-                    We’re trending on <span className="font-semibold">Product Hunt</span> today 🚀  <br />
-                    <span className="font-semibold">Your vote counts now — only 24 hours to shine!</span>  
-                    <ul className="list-disc pl-5 space-y-2 mt-3">
-                      <li>Click “Upvote” to help FloatQuickTrans reach more people ❤️</li>
-                      <li>Leave a quick comment — feedback boosts visibility 💬</li>
-                      <li>Share the link with friends who love productivity tools 🛠️</li>
-                      <li>Let’s make “translation without distraction” go viral 🌍</li>
-                    </ul>
-                  </p>
+                  Watch a quick demo and follow <span className="font-semibold">FloatQuickTrans</span> on Product Hunt.
                 </p>
+                {/* 分割线 */}
+                <hr className="my-4" />
+                <div className="text-muted-foreground md:text-lg">
+                  <p>
+                    We're trending on <span className="font-semibold">Product Hunt</span> today 🚀  <br />
+                    <span className="font-semibold">Your vote counts now — only 24 hours to shine!</span>
+                  </p>
+                  <ul className="list-disc pl-5 space-y-2 mt-3">
+                    <li>Click "Upvote" to help FloatQuickTrans reach more people ❤️</li>
+                    <li>Leave a quick comment — feedback boosts visibility 💬</li>
+                    <li>Share the link with friends who love productivity tools 🛠️</li>
+                    <li>Let's make "translation without distraction" go viral 🌍</li>
+                  </ul>
+                </div>
                 <div className="flex items-center gap-3">
                   <Button asChild>
                     <Link
