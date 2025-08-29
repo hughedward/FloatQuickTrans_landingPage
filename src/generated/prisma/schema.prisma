@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/**
+ * 下载统计表 - 单表记录所有平台的下载统计信息
+ * 采用单行记录方式，避免多行查询的复杂性
+ */
+model DownloadStats {
+  id                  Int       @id @default(1) // 固定ID为1，确保只有一条记录
+  macosCount          Int       @default(0) // macOS下载次数
+  windowsCount        Int       @default(0) // Windows下载次数
+  lastMacosDownload   DateTime? // 最后一次macOS下载时间
+  lastWindowsDownload DateTime? // 最后一次Windows下载时间
+  createdAt           DateTime  @default(now()) // 记录创建时间
+  updatedAt           DateTime  @updatedAt // 记录更新时间
+
+  @@map("download_stats")
+}

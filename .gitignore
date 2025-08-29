@@ -48,5 +48,3 @@ icon.png
 .idx/
 .modified
 dev.nix
-
-/src/generated/prisma
