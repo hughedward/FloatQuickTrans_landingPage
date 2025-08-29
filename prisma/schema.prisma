@@ -14,25 +14,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// 下载统计模型
+/**
+ * 下载统计表 - 单表记录所有平台的下载统计信息
+ * 采用单行记录方式，避免多行查询的复杂性
+ */
 model DownloadStats {
-  id          String   @id @default(cuid())
-  platform    String   // "macos" 或 "windows"
-  count       Int      @default(0)
-  lastUpdated DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  id                    Int      @id @default(1) // 固定ID为1，确保只有一条记录
+  macosCount           Int      @default(0)     // macOS下载次数
+  windowsCount         Int      @default(0)     // Windows下载次数
+  lastMacosDownload    DateTime?               // 最后一次macOS下载时间
+  lastWindowsDownload  DateTime?               // 最后一次Windows下载时间
+  createdAt            DateTime @default(now()) // 记录创建时间
+  updatedAt            DateTime @updatedAt      // 记录更新时间
 
-  @@unique([platform])
   @@map("download_stats")
-}
-
-// 下载记录模型（可选，用于详细统计）
-model DownloadRecord {
-  id        String   @id @default(cuid())
-  platform  String   // "macos" 或 "windows"
-  userAgent String?
-  ip        String?
-  timestamp DateTime @default(now())
-
-  @@map("download_records")
 }

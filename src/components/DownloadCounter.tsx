@@ -94,23 +94,43 @@ export default function DownloadCounter({
   }
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <Download className="h-4 w-4" />
-      <div className="flex flex-col">
-        <span className="text-sm font-medium">
-          {formatNumber(stats.total)} 
-        </span>
-        {showPlatformBreakdown && (
-          <div className="text-xs text-muted-foreground flex gap-3">
+    <div className={`inline-flex items-center justify-center ${className}`}>
+      {showPlatformBreakdown ? (
+        <div className="flex items-center gap-4 px-4 py-2 bg-muted/30 rounded-full border border-border/50">
+          <div className="flex items-center gap-2">
+            <Download className="h-4 w-4 text-primary" />
+            <span className="text-sm font-semibold text-foreground">
+              {formatNumber(stats.total)}
+            </span>
+          </div>
+          <div className="h-4 w-px bg-border" />
+          <div className="flex items-center gap-3 text-xs">
             {stats.platforms.macos && (
-              <span>macOS: {formatNumber(stats.platforms.macos.count)}</span>
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 rounded-full bg-blue-500" />
+                <span className="text-muted-foreground">
+                  macOS: {formatNumber(stats.platforms.macos.count)}
+                </span>
+              </div>
             )}
             {stats.platforms.windows && (
-              <span>Windows: {formatNumber(stats.platforms.windows.count)}</span>
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 rounded-full bg-green-500" />
+                <span className="text-muted-foreground">
+                  Windows: {formatNumber(stats.platforms.windows.count)}
+                </span>
+              </div>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-muted/20 rounded-full">
+          <Download className="h-4 w-4 text-primary" />
+          <span className="text-sm font-medium text-foreground">
+            {formatNumber(stats.total)}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

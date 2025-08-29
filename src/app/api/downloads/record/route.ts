@@ -29,40 +29,54 @@ export async function POST(request: NextRequest) {
 
     // 使用事务来确保数据一致性
     const result = await prisma.$transaction(async (tx) => {
-      // 记录下载事件
-      const downloadRecord = await tx.downloadRecord.create({
-        data: {
-          platform,
-          userAgent,
-          ip,
-        },
+      // 获取或创建统计记录
+      let stats = await tx.downloadStats.findUnique({
+        where: { id: 1 },
       });
 
-      // 更新或创建统计数据
-      const downloadStats = await tx.downloadStats.upsert({
-        where: {
-          platform,
-        },
-        update: {
-          count: {
-            increment: 1,
+      if (!stats) {
+        // 创建初始统计记录
+        stats = await tx.downloadStats.create({
+          data: {
+            id: 1,
+            macosCount: platform === 'macos' ? 1 : 0,
+            windowsCount: platform === 'windows' ? 1 : 0,
+            lastMacosDownload: platform === 'macos' ? new Date() : undefined,
+            lastWindowsDownload: platform === 'windows' ? new Date() : undefined,
           },
-        },
-        create: {
-          platform,
-          count: 1,
-        },
-      });
+        });
+      } else {
+        // 更新统计记录
+        const updateData: any = {};
+        
+        if (platform === 'macos') {
+          updateData.macosCount = stats.macosCount + 1;
+          updateData.lastMacosDownload = new Date();
+        } else if (platform === 'windows') {
+          updateData.windowsCount = stats.windowsCount + 1;
+          updateData.lastWindowsDownload = new Date();
+        }
 
-      return { downloadRecord, downloadStats };
+        stats = await tx.downloadStats.update({
+          where: { id: 1 },
+          data: updateData,
+        });
+      }
+
+      return { stats };
     });
+
+    // 计算当前平台的下载次数
+    const currentCount = platform === 'macos' 
+      ? result.stats.macosCount 
+      : result.stats.windowsCount;
 
     return NextResponse.json({
       success: true,
       data: {
         platform,
-        newCount: result.downloadStats.count,
-        recordId: result.downloadRecord.id,
+        newCount: currentCount,
+        totalCount: result.stats.macosCount + result.stats.windowsCount,
       },
     });
   } catch (error) {

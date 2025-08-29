@@ -7,28 +7,38 @@ import { prisma } from '@/lib/prisma';
  */
 export async function GET() {
   try {
-    // 获取所有平台的下载统计
-    const stats = await prisma.downloadStats.findMany({
-      select: {
-        platform: true,
-        count: true,
-        lastUpdated: true,
-      },
+    // 获取下载统计记录（单条记录）
+    let stats = await prisma.downloadStats.findUnique({
+      where: { id: 1 },
     });
 
+    // 如果记录不存在，创建初始记录
+    if (!stats) {
+      stats = await prisma.downloadStats.create({
+        data: {
+          id: 1,
+          macosCount: 0,
+          windowsCount: 0,
+        },
+      });
+    }
+
     // 计算总下载次数
-    const totalDownloads = stats.reduce((sum, stat) => sum + stat.count, 0);
+    const totalDownloads = stats.macosCount + stats.windowsCount;
 
     // 格式化返回数据
     const formattedStats = {
       total: totalDownloads,
-      platforms: stats.reduce((acc, stat) => {
-        acc[stat.platform] = {
-          count: stat.count,
-          lastUpdated: stat.lastUpdated,
-        };
-        return acc;
-      }, {} as Record<string, { count: number; lastUpdated: Date }>),
+      platforms: {
+        macos: {
+          count: stats.macosCount,
+          lastUpdated: stats.lastMacosDownload,
+        },
+        windows: {
+          count: stats.windowsCount,
+          lastUpdated: stats.lastWindowsDownload,
+        },
+      },
     };
 
     return NextResponse.json({
