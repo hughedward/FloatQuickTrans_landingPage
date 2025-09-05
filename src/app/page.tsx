@@ -171,7 +171,7 @@ export default function Home() {
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
                     🥳Seamlessly translate text from anywhere on your screen.
                     Real-time streaming, text-to-speech, and global hotkeys to
-                    supercharge your workflow.And it's now free 🎉
+                    supercharge your workflow.And it's now free 🎉(old versions)
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -453,7 +453,9 @@ export default function Home() {
                 <AccordionItem value="item-1">
                   <AccordionTrigger>Is FloatQuickTrans free?</AccordionTrigger>
                   <AccordionContent>
-                    Yes, FloatQuickTrans is free to use. We offer all core features at no cost. You can support the development by buying us a coffee!
+                    Yes, FloatQuickTrans is free to use(old versions on this landing page). We offer all core features at no cost. You can support the development by buying us a coffee!
+                    If you need latest versions, you can go to apple store and download it.
+                    You can contact us if you have any questions.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
